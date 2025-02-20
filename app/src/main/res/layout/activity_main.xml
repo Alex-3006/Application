@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto Kennzeichen" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputKennzeichen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text=""
+            android:hint="AA-AA-11"/>
+
+        <Button
+            android:id="@+id/infoKennzeichen"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageKennzeichen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Fahrzeug Ident" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputIdent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text=""
+            android:hint="WVWZZZ1AAAA111111"/>
+
+        <Button
+            android:id="@+id/infoIdent"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageIdent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Brief" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputBrief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text=""
+            android:hint="AAAA1111"/>
+
+        <Button
+            android:id="@+id/infoBrief"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageBrief"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Code Vorne" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputVorne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text=""
+            android:hint="AAA"/>
+
+        <Button
+            android:id="@+id/infoVorne"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageVorne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Code Hinten" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputHinten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text=""
+            android:hint="AAA"/>
+
+        <Button
+            android:id="@+id/infoHinten"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageHinten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/grey"
+        android:text="Save JSON"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/readButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/grey"
+        android:text="Read JSON"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="JSON Output"
+        android:textSize="18sp" />
+</LinearLayout>
