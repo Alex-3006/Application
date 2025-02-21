@@ -3,6 +3,7 @@ package com.example.application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import kotlin.reflect.typeOf
 
 class MainActivity : AppCompatActivity() {
     private val fileName = "user_data.json"
@@ -41,15 +43,53 @@ class MainActivity : AppCompatActivity() {
         val readButton = findViewById<Button>(R.id.readButton)
         val textView = findViewById<TextView>(R.id.textView)
 
+        try {
+            val file = File(filesDir, "user_data.json")
+
+            val writer = FileWriter(file, false) // 'false' ensures overwriting, not appending
+            writer.write("") // Pretty-print JSON
+            writer.flush()
+            writer.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
         // Save JSON data when the button is clicked
         saveButton.setOnClickListener {
-            if (inputKennzeichen.text.isEmpty() or inputIdent.text.isEmpty() or inputBrief.text.isEmpty() or inputVorne.text.isEmpty() or inputHinten.text.isEmpty()) {
-                Toast.makeText(this, "Field cannot be empty", Toast.LENGTH_SHORT).show()
+            if (inputKennzeichen1.text.isEmpty() or inputKennzeichen2.text.isEmpty() or inputKennzeichen3.text.isEmpty() or inputIdent.text.isEmpty() or inputBrief.text.isEmpty() or inputVorne.text.isEmpty() or inputHinten.text.isEmpty()) {
+                Toast.makeText(this, "Feld kann nicht leer sein", Toast.LENGTH_LONG).show()
+            } else if (inputKennzeichen1.text.length != 1 && inputKennzeichen1.text.length != 2 && inputKennzeichen1.text.length != 3) {
+                Toast.makeText(this, "Landkreis nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+            } else if (inputKennzeichen2.text.length != 1 && inputKennzeichen2.text.length != 2) {
+                Toast.makeText(this, "Buchstabe der Erkennungsnummer nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+            } else if (inputKennzeichen3.text.length != 1 && inputKennzeichen3.text.length != 2 && inputKennzeichen3.text.length != 3 && inputKennzeichen3.text.length != 4) {
+                Toast.makeText(this, "Nummer der Erkennungsnummer nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+            }
+            else if (inputIdent.text.length != 15 && inputIdent.text.length != 16 && inputIdent.text.length != 17){
+                Toast.makeText(this, "Fahrzeug-Identifizierungsnummer ist nicht korrekt", Toast.LENGTH_LONG).show()
+            }
+            else if (inputBrief.text.length != 8) {
+                Toast.makeText(this, "Sicherheitscode des Briefes ist nicht korrekt", Toast.LENGTH_LONG).show()
+            }
+            else if (inputVorne.text.length != 3) {
+                Toast.makeText(this, "Code vorne ist nicht korrekt", Toast.LENGTH_LONG).show()
+            }
+            else if (inputHinten.text.length != 3) {
+                Toast.makeText(this, "Code hinten ist nicht korrekt", Toast.LENGTH_LONG).show()
             }
             else {
                 val jsonObject = JSONObject()
-                jsonObject.put("Kennzeichen", inputKennzeichen.text)
+
+                var inputKennzeichen : Editable = Editable.Factory.getInstance().newEditable("")
+                inputKennzeichen.append(inputKennzeichen1.text)
+                inputKennzeichen.append("-")
+                inputKennzeichen.append(inputKennzeichen2.text)
+                inputKennzeichen.append("-")
+                inputKennzeichen.append(inputKennzeichen3.text)
+
+                jsonObject.put("Kennzeichen", inputKennzeichen)
                 jsonObject.put("imageKennzeichen", imageCameraKennzeichen.toString())
+
                 jsonObject.put("Ident", inputIdent.text)
                 jsonObject.put("imageIdent", imageCameraIdent.toString())
                 jsonObject.put("Brief", inputBrief.text)
@@ -149,12 +189,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Read JSON data when the button is clicked
-        readButton.setOnClickListener {
-            val jsonData = readJsonFromFile()
-            textView.text = jsonData ?: "No JSON data found."
-        }
-
         var cameraKennzeichen: Button
         cameraKennzeichen = findViewById(R.id.cameraKennzeichen)
         imageCameraKennzeichen = findViewById(R.id.imageCameraKennzeichen)
@@ -203,6 +237,12 @@ class MainActivity : AppCompatActivity() {
         cameraHinten.setOnClickListener {
             val intent = Intent(this, CameraActivity::class.java)
             cameraResultLauncherHinten.launch(intent)
+        }
+
+        // Read JSON data when the button is clicked
+        readButton.setOnClickListener {
+            val jsonData = readJsonFromFile()
+            textView.text = jsonData ?: "No JSON data found."
         }
     }
 

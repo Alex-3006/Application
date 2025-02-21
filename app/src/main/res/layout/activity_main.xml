@@ -23,6 +23,7 @@
             android:ems="3"
             android:inputType="text"
             android:text=""
+            android:maxLength="3"
             android:hint="AA"/>
 
         <TextView
@@ -37,6 +38,7 @@
             android:ems="3"
             android:inputType="text"
             android:text=""
+            android:maxLength="2"
             android:hint="AA"/>
 
         <TextView
@@ -49,8 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
-            android:inputType="text"
+            android:inputType="number"
             android:text=""
+            android:maxLength="4"
             android:hint="11"/>
 
         <Button
@@ -83,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Fahrzeug Ident" />
+        android:text="Fahrzeug-Identifizierungsnummer" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -142,6 +145,7 @@
             android:ems="10"
             android:inputType="text"
             android:text=""
+            android:maxLength="8"
             android:hint="AAAA1111"/>
 
         <Button
@@ -188,6 +192,7 @@
             android:ems="10"
             android:inputType="text"
             android:text=""
+            android:maxLength="3"
             android:hint="AAA"/>
 
         <Button
@@ -234,6 +239,7 @@
             android:ems="10"
             android:inputType="text"
             android:text=""
+            android:maxLength="3"
             android:hint="AAA"/>
 
         <Button
