@@ -1,10 +1,10 @@
 package com.example.application
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,13 +12,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import kotlin.reflect.typeOf
 
+// Missing: Abfall + reservierung, nur 1 kennzeichenschild, agbs; erklärungen; bezahlen;
 class MainActivity : AppCompatActivity() {
     private val fileName = "user_data.json"
     private lateinit var imageCameraKennzeichen: ImageView
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageCameraVorne: ImageView
     private lateinit var imageCameraHinten: ImageView
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         val inputBrief = findViewById<EditText>(R.id.inputBrief)
         val inputVorne = findViewById<EditText>(R.id.inputVorne)
         val inputHinten = findViewById<EditText>(R.id.inputHinten)
+
+        val textKennzeichen = findViewById<TextView>(R.id.textKennzeichen)
+        val textIdent = findViewById<TextView>(R.id.textIdent)
+        val textBrief = findViewById<TextView>(R.id.textBrief)
+        val textVorne = findViewById<TextView>(R.id.textVorne)
+        val textHinten = findViewById<TextView>(R.id.textHinten)
 
         val saveButton = findViewById<Button>(R.id.saveButton)
         val readButton = findViewById<Button>(R.id.readButton)
@@ -56,26 +64,53 @@ class MainActivity : AppCompatActivity() {
 
         // Save JSON data when the button is clicked
         saveButton.setOnClickListener {
+            inputKennzeichen1.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputKennzeichen2.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputKennzeichen3.setTextColor(ContextCompat.getColor(this, R.color.black))
+            textKennzeichen.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputIdent.setTextColor(ContextCompat.getColor(this, R.color.black))
+            textIdent.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputBrief.setTextColor(ContextCompat.getColor(this, R.color.black))
+            textBrief.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputVorne.setTextColor(ContextCompat.getColor(this, R.color.black))
+            textVorne.setTextColor(ContextCompat.getColor(this, R.color.black))
+            inputHinten.setTextColor(ContextCompat.getColor(this, R.color.black))
+            textHinten.setTextColor(ContextCompat.getColor(this, R.color.black))
+
             if (inputKennzeichen1.text.isEmpty() or inputKennzeichen2.text.isEmpty() or inputKennzeichen3.text.isEmpty() or inputIdent.text.isEmpty() or inputBrief.text.isEmpty() or inputVorne.text.isEmpty() or inputHinten.text.isEmpty()) {
                 Toast.makeText(this, "Feld kann nicht leer sein", Toast.LENGTH_LONG).show()
             } else if (inputKennzeichen1.text.length != 1 && inputKennzeichen1.text.length != 2 && inputKennzeichen1.text.length != 3) {
                 Toast.makeText(this, "Landkreis nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+                inputKennzeichen1.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textKennzeichen.setTextColor(ContextCompat.getColor(this, R.color.red))
             } else if (inputKennzeichen2.text.length != 1 && inputKennzeichen2.text.length != 2) {
                 Toast.makeText(this, "Buchstabe der Erkennungsnummer nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+                inputKennzeichen2.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textKennzeichen.setTextColor(ContextCompat.getColor(this, R.color.red))
             } else if (inputKennzeichen3.text.length != 1 && inputKennzeichen3.text.length != 2 && inputKennzeichen3.text.length != 3 && inputKennzeichen3.text.length != 4) {
                 Toast.makeText(this, "Nummer der Erkennungsnummer nicht korrekt angegeben", Toast.LENGTH_LONG).show()
+                inputKennzeichen3.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textKennzeichen.setTextColor(ContextCompat.getColor(this, R.color.red))
             }
             else if (inputIdent.text.length != 15 && inputIdent.text.length != 16 && inputIdent.text.length != 17){
                 Toast.makeText(this, "Fahrzeug-Identifizierungsnummer ist nicht korrekt", Toast.LENGTH_LONG).show()
+                inputIdent.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textIdent.setTextColor(ContextCompat.getColor(this, R.color.red))
             }
-            else if (inputBrief.text.length != 8) {
+            else if (inputBrief.text.length != 7 && inputBrief.text.length != 8) {
                 Toast.makeText(this, "Sicherheitscode des Briefes ist nicht korrekt", Toast.LENGTH_LONG).show()
+                inputBrief.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textBrief.setTextColor(ContextCompat.getColor(this, R.color.red))
             }
             else if (inputVorne.text.length != 3) {
                 Toast.makeText(this, "Code vorne ist nicht korrekt", Toast.LENGTH_LONG).show()
+                inputVorne.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textVorne.setTextColor(ContextCompat.getColor(this, R.color.red))
             }
             else if (inputHinten.text.length != 3) {
                 Toast.makeText(this, "Code hinten ist nicht korrekt", Toast.LENGTH_LONG).show()
+                inputHinten.setTextColor(ContextCompat.getColor(this, R.color.red))
+                textHinten.setTextColor(ContextCompat.getColor(this, R.color.red))
             }
             else {
                 val jsonObject = JSONObject()

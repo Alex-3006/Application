@@ -8,6 +8,7 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/textKennzeichen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Auto Kennzeichen" />
@@ -83,6 +84,7 @@
         android:src="@drawable/ic_launcher_foreground" />
 
     <TextView
+        android:id="@+id/textIdent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -99,6 +101,7 @@
             android:ems="10"
             android:inputType="text"
             android:text=""
+            android:maxLength="17"
             android:hint="WVWZZZ1AAAA111111"/>
 
         <Button
@@ -128,10 +131,11 @@
         android:src="@drawable/ic_launcher_foreground" />
 
     <TextView
+        android:id="@+id/textBrief"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Brief" />
+        android:text="Sicherheitscode Zulassungsbescheinigung Teil 1" />
 
 
     <LinearLayout
@@ -175,6 +179,7 @@
         android:src="@drawable/ic_launcher_foreground" />
 
     <TextView
+        android:id="@+id/textVorne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -222,6 +227,7 @@
         android:src="@drawable/ic_launcher_foreground" />
 
     <TextView
+        android:id="@+id/textHinten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
